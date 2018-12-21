@@ -5,20 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Movie App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
 </head>
 <body>
     <div class="container">
+        <h1>Top Movies Playing Now!</h1>
         <div class="row">
             <div id="search-container" class="col-12 text-center">
                 <form id="movie-form">
-                    <input id="search-input" type="text" placeholder="Enter your movie search here" />
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <input id="search-input" class="search-input" type="text" placeholder="Enter your movie search here" />
+                    <button type="submit" class="search-button btn">Search</button>
                 </form>
             </div>
-            <div id="movie-grid" class="col-12">
-                <!-- jQuery, don't fail us now... get us the movie posters! -->
+            <div id="movie-grid" class="container">
+                <div class="top-three row"></div>
+                <div class="bottom-three row"></div>
             </div>
         </div>
     </div>
