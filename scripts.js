@@ -6,8 +6,7 @@ const imageBaseUrl = 'http://image.tmdb.org/t/p/';
 const nowPlayingUrl = `${apiBaseUrl}/movie/now_playing?api_key=${apiKey}`;
 
 $.getJSON(nowPlayingUrl, (movieData)=>{
-    console.log(movieData);
-    
+    // console.log(movieData);
     for(let i =0; i < 6; i++){
         let movieInfo = movieData.results[i];
         const posterUrl = `${imageBaseUrl}w300${movieInfo.poster_path}`;
@@ -31,11 +30,24 @@ $.getJSON(nowPlayingUrl, (movieData)=>{
     }
 });
 
-{/* 
-<div class="movie-text">
-<div class="title">${movie.title}</div>
-<div class="title">Release Date: ${movie.release_date}</div>
-<div class="title">Popularity: ${movie.popularity}</div>
-<div class="title">Vote Count: ${movie.vote_count}</div>
-<div class="title">Vote Average: ${movie.vote_average}</div>
-</div> */}
+$("#movie-form").submit((event)=>{
+    // stop the browser from going forward
+    event.preventDefault();
+    // get the value the user put in the search box
+    const movieSearch = $("#search-input").val();
+    const searchUrl = `${apiBaseUrl}/search/movie?api_key=${apiKey}&query=${movieSearch}`;
+    let newHTML = "";
+    localStorage.setItem("movieList", movieSearch);
+
+    $.getJSON(searchUrl, (movieData)=>{
+        // console.log(movieData);
+        movieData.results.forEach((movie)=>{
+            const posterUrl = `${imageBaseUrl}w300${movie.poster_path}`;
+            newHTML += `
+            <div clas="col-3">
+                <img src="${posterUrl}"/>
+            </div>`;
+        })
+        $("#movie-grid").html(newHTML);
+    });
+});
